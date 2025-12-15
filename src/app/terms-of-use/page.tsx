@@ -146,17 +146,17 @@ export default function TermsOfUse() {
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4">
                 Each time you make a Submission, you represent and warrant as follows:
               </p>
-              <ul className="list-disc list-inside text-sm sm:text-base text-gray-700 leading-relaxed mb-4 space-y-2 ml-4">
-                <li>You own your Submission or have the right to submit it, and in submitting it you will not be infringing any rights of any third party, including intellectual property rights (such as copyright or trademark), privacy or publicity rights, rights of confidentiality, or rights under contract.</li>
-                <li>Your Submission is not illegal, obscene, defamatory, threatening, pornographic, harassing, hateful, in any way offensive, and does not encourage conduct that would be considered a criminal offense, and does not give rise to civil liability, violate any law, or is otherwise deemed inappropriate.</li>
-                <li>Your Submission does not identify any individual (including by way of name, address, picture, or video) under the age of 18 and if your Submission identifies any individual over the age of 18, you have that person&apos;s consent to being identified in exactly that way in your Submission.</li>
-                <li>You are not impersonating any other person, intentionally or otherwise.</li>
-                <li>You will not collect usernames and/or email addresses of others for the purpose of sending unsolicited or unauthorized emails.</li>
-                <li>You will not engage in criminal or tortious activity, including fraud, spamming, spimming, sending of viruses or other harmful files, copyright infringement, patent infringement, or theft of trade secrets or attempt to impersonate another user or person.</li>
-                <li>You will not engage in any automated use of the system, such as using scripts to alter our Content.</li>
-                <li>You will not, without authorization, access, tamper with, or use non-public areas of the Site, our computer systems, or the technical delivery systems of our service providers.</li>
-                <li>Except as necessary to maintain your own computer security by use of commercial-off-the-shelf anti-virus or anti-malware products, you will not attempt to probe, scan, or test the vulnerability of the Site or any other component of our system or network or breach any security or authentication measures.</li>
-              </ul>
+                <ul className="list-disc list-inside text-sm sm:text-base text-gray-700 leading-relaxed mb-4 space-y-2 ml-4">
+                  <li>You own your Submission or have the right to submit it, and in submitting it you will not be infringing any rights of any third party, including intellectual property rights (such as copyright or trademark), privacy or publicity rights, rights of confidentiality, or rights under contract.</li>
+                  <li>Your Submission is not illegal, obscene, defamatory, threatening, pornographic, harassing, hateful, in any way offensive, and does not encourage conduct that would be considered a criminal offense, and does not give rise to civil liability, violate any law, or is otherwise deemed inappropriate.</li>
+                  <li>Your Submission does not identify any individual (including by way of name, address, picture, or video) under the age of 18 and if your Submission identifies any individual over the age of 18, you have that person&apos;s consent to being identified in exactly that way in your Submission.</li>
+                  <li>You are not impersonating any other person, intentionally or otherwise.</li>
+                  <li>You will not collect usernames and/or email addresses of others for the purpose of sending unsolicited or unauthorized emails.</li>
+                  <li>You will not engage in criminal or tortious activity, including fraud, spamming, spimming, sending of viruses or other harmful files, copyright infringement, patent infringement, or theft of trade secrets or attempt to impersonate another user or person.</li>
+                  <li>You will not engage in any automated use of the system, such as using scripts to alter our Content.</li>
+                  <li>You will not, without authorization, access, tamper with, or use non-public areas of the Site, our computer systems, or the technical delivery systems of our service providers.</li>
+                  <li>Except as necessary to maintain your own computer security by use of commercial-off-the-shelf anti-virus or anti-malware products, you will not attempt to probe, scan, or test the vulnerability of the Site or any other component of our system or network or breach any security or authentication measures.</li>
+                </ul>
 
               <p className="text-sm sm:text-base text-gray-700 leading-relaxed mb-4">
                 We are entitled to identify you to third parties who claim that their rights have been infringed by your Submission.

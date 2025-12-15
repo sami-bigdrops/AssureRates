@@ -146,7 +146,7 @@ export const ABOUT = {
   MAIN_HEADING: {
     part1: "Why",
     part2: "Trust ",
-    part3: "Assurifii With Your Insurance Decisions?",
+    part3: "AssureRates With Your Insurance Decisions?",
   },
   SUB_DESCRIPTION: "Our expertise and partnerships ensure you get reliable coverage at the best possible rates.",
   CTA_BUTTON: "More About Us",
@@ -166,7 +166,7 @@ export const ABOUT = {
     {
       icon: "hand-house",
       title: "We've Been There Too",
-      description: "As insurance customers ourselves, we understand the frustration of rising rates. That's why Assurifii makes it simple to shop, compare, and save—without the hassle."
+      description: "As insurance customers ourselves, we understand the frustration of rising rates. That's why AssureRates makes it simple to shop, compare, and save—without the hassle."
     }
   ]
 }
@@ -174,7 +174,7 @@ export const ABOUT = {
 // How It Works Section Constants
 export const WORKS = {
   MAIN_HEADING: {
-    part1: "How Assurifii",
+    part1: "How AssureRates",
     part2: "Works"
   },
   SUB_HEADING: "In just 3 simple steps, compare, choose, and get covered - stress-free.",
@@ -182,12 +182,12 @@ export const WORKS = {
     {
       number: "1",
       title: "Compare Plans & Quotes",
-      description: "Finding the right insurance doesn't have to be complicated. With Assurifii, you can instantly compare quotes from multiple trusted providers, ensuring pricing transparency and helping you choose what's best for your needs. Most of our users save money when they shop with us."
+      description: "Finding the right insurance doesn't have to be complicated. With AssureRates, you can instantly compare quotes from multiple trusted providers, ensuring pricing transparency and helping you choose what's best for your needs. Most of our users save money when they shop with us."
     },
     {
       number: "2", 
       title: "Choose from Top Providers",
-      description: "Assurifii partners with licensed and verified insurance companies to bring you only the most reliable options. Whether it's auto, home, or warranty coverage, you can explore trusted plans all in one place. Need help? Licensed agents are always available to guide you."
+      description: "AssureRates partners with licensed and verified insurance companies to bring you only the most reliable options. Whether it's auto, home, or warranty coverage, you can explore trusted plans all in one place. Need help? Licensed agents are always available to guide you."
     },
     {
       number: "3",
@@ -321,7 +321,7 @@ export const RESULT_PAGE = {
     part2: "Results",
     part3: ", Better Coverage"
   },
-  SUB_DESCRIPTION: "At Assurifii, we believe peace of mind should be simple — and we're here to make it happen.",
+  SUB_DESCRIPTION: "At AssureRates, we believe peace of mind should be simple — and we're here to make it happen.",
   FEATURES: [
     {
       id: "1",

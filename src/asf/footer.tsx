@@ -22,7 +22,7 @@ export default function Footer({ hideFloatContainer = false }: FooterProps) {
     >
       <div className="container mx-auto">
         {!hideFloatContainer && (
-          <div className="footer-float-container md:max-w-[700px] lg:max-w-[820px] xl:max-w-[1040px] mx-auto absolute -top-117 md:-top-38 xl:-top-47 md:left-8 lg:left-26 xl:left-58 min-[375px]:-top-125 min-[425px]:-top-131 left-0 w-full flex flex-col justify-center items-center md:flex-row gap-6 md:gap-10 p-[20px] py-[40px] md:px-[30px] md:py-[50px] xl:py-[60px] xl:px-[40px] rounded-t-[30px] md:rounded-b-[30px] bg-[#E8F4FC] ">
+        <div className="footer-float-container md:max-w-[700px] lg:max-w-[820px] xl:max-w-[1040px] mx-auto absolute -top-117 md:-top-38 xl:-top-47 md:left-8 lg:left-26 xl:left-58 min-[375px]:-top-125 min-[425px]:-top-131 left-0 w-full flex flex-col justify-center items-center md:flex-row gap-6 md:gap-10 p-[20px] py-[40px] md:px-[30px] md:py-[50px] xl:py-[60px] xl:px-[40px] rounded-t-[30px] md:rounded-b-[30px] bg-[#E8F4FC] ">
           <div className="footer-float-left md:w-[50%]">
             <div className="title-container flex flex-col items-center justify-center md:justify-start md:items-start gap-4 md:gap-5 xl:gap-5 text-center">
               <div className="title">

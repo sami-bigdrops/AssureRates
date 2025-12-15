@@ -68,7 +68,7 @@ export default function Navbar() {
             <Link href="/" onClick={closeMobileMenu}>
               <Image 
                 src="/logo.svg" 
-                alt="Assurifii" 
+                alt="AssureRates" 
                 width={120} 
                 height={30} 
                 className="h-8 w-auto" 
@@ -174,7 +174,7 @@ export default function Navbar() {
             <Link href="/">
               <Image 
                 src="/logo.svg" 
-                alt="Assurifii" 
+                alt="AssureRates" 
                 width={120} 
                 height={30} 
                 className="h-8 md:h-9 lg:h-9 xl:h-10 w-auto" 
