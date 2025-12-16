@@ -1,10 +1,47 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { HERO_CONSTANTS } from '@/lib/constant'
+import { useTab } from '@/contexts/TabContext'
+
+const TABS = ['AUTO_INSURANCE', 'HOME_INSURANCE', 'MORTGAGE', 'LIFE_INSURANCE'] as const
 
 export default function Hero() {
-  const [activeTab, setActiveTab] = useState<'AUTO_INSURANCE' | 'HOME_INSURANCE' | 'MORTGAGE' | 'LIFE_INSURANCE'>('AUTO_INSURANCE')
+  const { activeTab, setActiveTab } = useTab()
+  const autoChangeIntervalRef = useRef<NodeJS.Timeout | null>(null)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768
+      
+      if (isMobile) {
+        if (!autoChangeIntervalRef.current) {
+          autoChangeIntervalRef.current = setInterval(() => {
+            setActiveTab((prev) => {
+              const currentIndex = TABS.indexOf(prev)
+              const nextIndex = (currentIndex + 1) % TABS.length
+              return TABS[nextIndex]
+            })
+          }, 3000)
+        }
+      } else {
+        if (autoChangeIntervalRef.current) {
+          clearInterval(autoChangeIntervalRef.current)
+          autoChangeIntervalRef.current = null
+        }
+      }
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      if (autoChangeIntervalRef.current) {
+        clearInterval(autoChangeIntervalRef.current)
+      }
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
 
   const getActiveContent = () => {
     return HERO_CONSTANTS.CONTENT_SECTIONS[activeTab]
@@ -17,7 +54,7 @@ export default function Hero() {
     if (isActive) {
       return `${baseClasses} text-white transition-all duration-300 py-4 `
     } else {
-      return `${baseClasses} bg-white text-gray-700 hover:bg-gray-50 shadow-sm transition-all duration-300`
+      return `${baseClasses} bg-white text-gray-700 hover:bg-gray-50  transition-all duration-300`
     }
   }
 
@@ -32,12 +69,48 @@ export default function Hero() {
     }
   }
 
+  const renderIcon = (key: string, size: string = "w-5 h-5") => {
+    const iconColor = activeTab === key ? "#2C80B4" : "white"
+    
+    if (key === 'AUTO_INSURANCE') {
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" className={size}>
+          <path d="M18.8224 12.5926C19.0039 10.0741 18.7669 9.5 18.6224 9.37778C18.5463 9.29457 18.4804 9.20256 18.4261 9.1037C18.4123 9.07566 18.3904 9.05243 18.3632 9.03704C18.3632 9.03704 18.3632 9.01111 18.3632 9C18.367 8.98043 18.367 8.96031 18.3632 8.94074C18.3336 8.87407 18.315 8.82593 18.3113 8.82222C18.115 8.24444 17.5336 8.14074 17.2817 7.98889L17.3854 7.74074C17.4446 7.74465 17.504 7.74465 17.5632 7.74074C17.7315 7.73863 17.8991 7.71876 18.0632 7.68148C18.2059 7.66333 18.3376 7.59544 18.4351 7.48976C18.5327 7.38408 18.5898 7.24737 18.5965 7.1037C18.5981 7.09141 18.5981 7.07896 18.5965 7.06667C18.478 6.38889 17.6521 6.32593 17.5632 6.32593C17.4814 6.31685 17.3985 6.32431 17.3196 6.34785C17.2408 6.37139 17.1674 6.41054 17.1039 6.46296C16.9314 6.63553 16.8263 6.86411 16.8076 7.10741C16.8076 7.21481 16.7743 7.31481 16.7558 7.4C16.1261 6.14815 15.6224 5.28889 15.6224 5.28889C15.0484 4.23704 14.3484 4.17778 14.2891 4.17778C12.9187 3.99791 11.5379 3.91006 10.1558 3.91481H10.1298C10.0991 3.89105 10.0613 3.87804 10.0224 3.87778C9.98355 3.87804 9.94582 3.89105 9.91503 3.91481H9.88911C8.50577 3.90994 7.12366 3.99779 5.75207 4.17778C5.65948 4.17778 4.9817 4.26296 4.42244 5.28889C4.42244 5.28889 3.90762 6.17037 3.28911 7.40741C3.27059 7.32222 3.25207 7.22593 3.23725 7.12222C3.21865 6.87599 3.11218 6.64465 2.93725 6.47037C2.87501 6.41834 2.80292 6.37939 2.72528 6.35584C2.64765 6.3323 2.56606 6.32464 2.4854 6.33333C2.40392 6.33333 1.56688 6.39259 1.44837 7.07407C1.44673 7.08637 1.44673 7.09882 1.44837 7.11111C1.45548 7.25345 1.51182 7.38889 1.60775 7.49428C1.70368 7.59967 1.83325 7.66846 1.97429 7.68889C2.14118 7.72459 2.31107 7.74443 2.4817 7.74815C2.54089 7.75206 2.60028 7.75206 2.65948 7.74815L2.76318 7.9963C2.51503 8.14444 1.92985 8.24815 1.73355 8.82593C1.73355 8.82593 1.71503 8.87407 1.6817 8.94815C1.67614 8.96751 1.67614 8.98804 1.6817 9.00741C1.67987 9.01968 1.67987 9.03217 1.6817 9.04444C1.65449 9.05983 1.63255 9.08307 1.61874 9.11111C1.56441 9.20788 1.49984 9.29852 1.42614 9.38148C1.11133 9.56296 1.04466 10.7407 1.17799 12.5926C1.15722 12.6089 1.14042 12.6297 1.12887 12.6534C1.11732 12.6772 1.11132 12.7032 1.11133 12.7296V15.5556C1.11133 15.7117 1.17337 15.8615 1.28381 15.972C1.39425 16.0824 1.54403 16.1444 1.70022 16.1444H3.62614C3.70348 16.1444 3.78005 16.1292 3.8515 16.0996C3.92295 16.07 3.98787 16.0266 4.04255 15.972C4.09723 15.9173 4.14061 15.8524 4.17021 15.7809C4.1998 15.7095 4.21503 15.6329 4.21503 15.5556V15.2778C4.37377 15.2779 4.53227 15.2903 4.68911 15.3148C5.85948 15.3963 7.55207 15.463 9.89281 15.4444C9.92284 15.4696 9.96108 15.4828 10.0002 15.4815C10.0394 15.4828 10.0776 15.4696 10.1076 15.4444H10.7928C13.0965 15.4444 14.715 15.363 15.7854 15.2741V15.5556C15.7854 15.7111 15.8469 15.8603 15.9566 15.9707C16.0662 16.081 16.215 16.1435 16.3706 16.1444H18.3002C18.4564 16.1444 18.6062 16.0824 18.7166 15.972C18.8271 15.8615 18.8891 15.7117 18.8891 15.5556V12.7111C18.8865 12.6879 18.8793 12.6654 18.8678 12.6451C18.8564 12.6247 18.8409 12.6069 18.8224 12.5926ZM2.44837 13.2037C2.36397 13.2044 2.28126 13.1801 2.21073 13.1337C2.1402 13.0874 2.08504 13.0211 2.05223 12.9434C2.01942 12.8656 2.01046 12.7798 2.02647 12.697C2.04249 12.6141 2.08276 12.5379 2.14217 12.4779C2.20159 12.418 2.27747 12.3771 2.3602 12.3603C2.44292 12.3436 2.52875 12.3518 2.60679 12.3839C2.68483 12.4161 2.75157 12.4706 2.79854 12.5408C2.84551 12.6109 2.87058 12.6934 2.87059 12.7778C2.87108 12.8335 2.86052 12.8888 2.83952 12.9405C2.81852 12.9921 2.78749 13.0391 2.74824 13.0787C2.70898 13.1183 2.66227 13.1498 2.6108 13.1712C2.55933 13.1927 2.50413 13.2037 2.44837 13.2037ZM3.51503 11.7815C3.31276 11.7815 3.115 11.7216 2.94663 11.6096C2.77825 11.4975 2.64677 11.3381 2.5687 11.1515C2.49063 10.9649 2.46947 10.7594 2.50787 10.5608C2.54627 10.3622 2.64252 10.1794 2.78452 10.0353C2.92652 9.89128 3.10793 9.79242 3.30596 9.75118C3.50398 9.70994 3.70978 9.72815 3.89748 9.80354C4.08518 9.87892 4.24641 10.0081 4.3609 10.1749C4.47539 10.3416 4.53804 10.5385 4.54096 10.7407C4.54292 10.8767 4.51783 11.0117 4.46716 11.1379C4.41648 11.2641 4.34122 11.3789 4.24576 11.4758C4.1503 11.5726 4.03654 11.6495 3.91109 11.702C3.78564 11.7545 3.65101 11.7815 3.51503 11.7815ZM4.12614 7.82222H4.09651C4.06701 7.82606 4.03713 7.82606 4.00762 7.82222C4.00869 7.80372 4.00869 7.78517 4.00762 7.76667C4.32985 6.69259 5.02614 4.94444 5.54466 4.84074C5.54466 4.84074 6.85577 4.57778 9.98911 4.60741C13.1224 4.57778 14.4336 4.83704 14.4336 4.84074C14.9521 4.94815 15.6484 6.69259 15.9669 7.76296C15.9691 7.78142 15.9691 7.80006 15.9669 7.81852C15.9388 7.82452 15.9098 7.82452 15.8817 7.81852H15.8484C13.7891 7.61481 10.015 7.61481 9.97799 7.61481C9.94096 7.61481 6.18911 7.61852 4.12614 7.82222ZM13.8335 13.1815C13.578 13.3667 10.9891 13.3778 10.015 13.3667C9.04096 13.3667 6.45207 13.3667 6.19651 13.1815C6.19651 13.1148 6.16688 11.7 5.62985 11.0889C5.64837 11.0407 5.7854 10.8 6.4854 10.7185C7.65125 10.5687 8.82485 10.4871 10.0002 10.4741C11.1855 10.4859 12.369 10.5675 13.5447 10.7185C14.241 10.8 14.3817 11.0407 14.4002 11.0889C13.8632 11.6889 13.8335 13.1148 13.8335 13.1815ZM15.4558 10.7407C15.455 10.5369 15.5148 10.3375 15.6275 10.1677C15.7402 9.99789 15.9007 9.86535 16.0888 9.78685C16.2769 9.70835 16.484 9.68743 16.684 9.72674C16.884 9.76605 17.0678 9.86382 17.2121 10.0077C17.3565 10.1515 17.4549 10.335 17.495 10.5348C17.535 10.7346 17.5148 10.9418 17.437 11.1302C17.3592 11.3186 17.2272 11.4796 17.0578 11.5929C16.8884 11.7062 16.6892 11.7667 16.4854 11.7667C16.213 11.7667 15.9516 11.6587 15.7587 11.4664C15.5657 11.2741 15.4568 11.0132 15.4558 10.7407ZM17.5521 13.1889C17.4678 13.1889 17.3855 13.1639 17.3154 13.1171C17.2454 13.0703 17.1908 13.0038 17.1586 12.926C17.1263 12.8481 17.1179 12.7625 17.1343 12.6799C17.1508 12.5972 17.1913 12.5214 17.2509 12.4618C17.3105 12.4022 17.3864 12.3617 17.469 12.3452C17.5516 12.3288 17.6372 12.3372 17.7151 12.3695C17.7929 12.4017 17.8594 12.4563 17.9062 12.5263C17.953 12.5964 17.978 12.6787 17.978 12.763C17.98 12.8201 17.9704 12.8771 17.9499 12.9305C17.9294 12.9839 17.8984 13.0326 17.8586 13.0738C17.8189 13.1149 17.7712 13.1476 17.7186 13.1699C17.6659 13.1922 17.6093 13.2037 17.5521 13.2037V13.1889Z" fill={iconColor}/>
+        </svg>
+      )
+    }
+    if (key === 'HOME_INSURANCE') {
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 20 20" fill="none" className={size}>
+          <path d="M16.9293 11.0714V16.4286C16.9293 16.622 16.8586 16.7894 16.7172 16.9308C16.5758 17.0722 16.4084 17.1429 16.215 17.1429H11.9293V12.8572H9.07211V17.1429H4.7864C4.59294 17.1429 4.42553 17.0722 4.28416 16.9308C4.1428 16.7894 4.07211 16.622 4.07211 16.4286V11.0714C4.07211 11.064 4.07397 11.0528 4.07769 11.038C4.08141 11.0231 4.08327 11.0119 4.08327 11.0045L10.5007 5.71429L16.9181 11.0045C16.9255 11.0194 16.9293 11.0417 16.9293 11.0714ZM19.4181 10.3013L18.7261 11.1272C18.6666 11.1942 18.5885 11.2351 18.4918 11.25H18.4583C18.3615 11.25 18.2834 11.224 18.2239 11.1719L10.5007 4.73215L2.77747 11.1719C2.68818 11.2314 2.5989 11.2574 2.50961 11.25C2.41288 11.2351 2.33476 11.1942 2.27524 11.1272L1.58327 10.3013C1.52375 10.2269 1.49771 10.1395 1.50515 10.0391C1.51259 9.93862 1.55351 9.85864 1.62791 9.79912L9.65247 3.11385C9.89056 2.9204 10.1733 2.82367 10.5007 2.82367C10.8281 2.82367 11.1108 2.9204 11.3489 3.11385L14.0721 5.39063V3.21429C14.0721 3.11013 14.1056 3.02456 14.1726 2.9576C14.2395 2.89063 14.3251 2.85715 14.4293 2.85715H16.5721C16.6763 2.85715 16.7618 2.89063 16.8288 2.9576C16.8958 3.02456 16.9293 3.11013 16.9293 3.21429V7.76787L19.3734 9.79912C19.4479 9.85864 19.4888 9.93862 19.4962 10.0391C19.5037 10.1395 19.4776 10.2269 19.4181 10.3013Z" fill={iconColor}/>
+        </svg>
+      )
+    }
+    if (key === 'MORTGAGE') {
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none" className={size}>
+          <path d="M28.7898 6.06448L22.5038 1.12267C22.402 1.04331 22.2749 1 22.1438 1C22.0127 1 21.8856 1.04331 21.7838 1.12267L15.4978 6.06448C15.4064 6.1361 15.3404 6.23313 15.3086 6.34224C15.2769 6.45136 15.2811 6.56723 15.3206 6.67398C15.3606 6.7801 15.4336 6.87182 15.5297 6.93667C15.6258 7.00151 15.7404 7.03633 15.8578 7.03638H17.0007V12.5273H16.4293C16.2777 12.5273 16.1323 12.5851 16.0252 12.6881C15.918 12.7911 15.8578 12.9307 15.8578 13.0764C15.8578 13.222 15.918 13.3617 16.0252 13.4646C16.1323 13.5676 16.2777 13.6255 16.4293 13.6255H27.8583C28.0099 13.6255 28.1552 13.5676 28.2624 13.4646C28.3696 13.3617 28.4298 13.222 28.4298 13.0764C28.4298 12.9307 28.3696 12.7911 28.2624 12.6881C28.1552 12.5851 28.0099 12.5273 27.8583 12.5273H27.2869V7.03638H28.4298C28.5472 7.03633 28.6618 7.00151 28.7579 6.93667C28.854 6.87182 28.927 6.7801 28.9669 6.67398C29.0065 6.56723 29.0107 6.45136 28.9789 6.34224C28.9472 6.23313 28.8812 6.1361 28.7898 6.06448ZM20.4294 12.5273V9.23274C20.4294 9.08711 20.4896 8.94745 20.5968 8.84447C20.704 8.7415 20.8493 8.68365 21.0009 8.68365H23.2867C23.4383 8.68365 23.5836 8.7415 23.6908 8.84447C23.7979 8.94745 23.8582 9.08711 23.8582 9.23274V12.5273H20.4294ZM15.2863 20.2146H1.57145C1.41989 20.2146 1.27454 20.2724 1.16738 20.3754C1.06021 20.4783 1 20.618 1 20.7636V28.4509C1 28.5965 1.06021 28.7362 1.16738 28.8392C1.27454 28.9422 1.41989 29 1.57145 29H15.2863C15.4379 29 15.5833 28.9422 15.6904 28.8392C15.7976 28.7362 15.8578 28.5965 15.8578 28.4509V20.7636C15.8578 20.618 15.7976 20.4783 15.6904 20.3754C15.5833 20.2724 15.4379 20.2146 15.2863 20.2146ZM8.4289 27.3527C7.86378 27.3527 7.31136 27.1917 6.84149 26.89C6.37161 26.5884 6.00539 26.1596 5.78913 25.6579C5.57287 25.1562 5.51628 24.6042 5.62653 24.0717C5.73678 23.5391 6.00891 23.0499 6.4085 22.6659C6.8081 22.282 7.31722 22.0205 7.87147 21.9146C8.42573 21.8086 9.00023 21.863 9.52233 22.0708C10.0444 22.2786 10.4907 22.6305 10.8046 23.082C11.1186 23.5335 11.2862 24.0643 11.2862 24.6073C11.2862 25.3354 10.9851 26.0337 10.4493 26.5486C9.91345 27.0635 9.18669 27.3527 8.4289 27.3527Z" fill={iconColor}/>
+          <path d="M8.5 26C9.32843 26 10 25.3284 10 24.5C10 23.6716 9.32843 23 8.5 23C7.67157 23 7 23.6716 7 24.5C7 25.3284 7.67157 26 8.5 26Z" fill={iconColor}/>
+          <path d="M4.52974 18.4709C4.58181 18.5193 4.6432 18.5572 4.71041 18.5825C4.77594 18.6106 4.84681 18.6251 4.91846 18.6251C4.99011 18.6251 5.06097 18.6106 5.1265 18.5825C5.19371 18.5572 5.25511 18.5193 5.30717 18.4709L6.6759 17.1428C6.77899 17.0428 6.83691 16.9071 6.83691 16.7656C6.83691 16.6242 6.77899 16.4885 6.6759 16.3884C6.5728 16.2884 6.43298 16.2322 6.28718 16.2322C6.14138 16.2322 6.00156 16.2884 5.89846 16.3884L5.46595 16.8134V15.4375C5.46595 13.7467 6.15813 12.1252 7.39022 10.9297C8.62231 9.73415 10.2934 9.0625 12.0358 9.0625H14.7733C14.9185 9.0625 15.0577 9.00653 15.1604 8.9069C15.2631 8.80727 15.3208 8.67215 15.3208 8.53125C15.3208 8.39035 15.2631 8.25523 15.1604 8.1556C15.0577 8.05597 14.9185 8 14.7733 8H12.0358C10.003 8 8.05339 8.78359 6.61595 10.1784C5.17851 11.5732 4.37097 13.465 4.37097 15.4375V16.8028L3.93845 16.3778C3.83535 16.2778 3.69553 16.2216 3.54973 16.2216C3.40393 16.2216 3.26411 16.2778 3.16101 16.3778C3.05792 16.4778 3 16.6135 3 16.755C3 16.8965 3.05792 17.0322 3.16101 17.1322L4.52974 18.4709ZM24.4693 14.5291C24.4173 14.4807 24.3559 14.4428 24.2887 14.4175C24.1554 14.3644 24.0059 14.3644 23.8726 14.4175C23.8054 14.4428 23.744 14.4807 23.6919 14.5291L22.3232 15.8572C22.2201 15.9572 22.1622 16.0929 22.1622 16.2344C22.1622 16.3758 22.2201 16.5115 22.3232 16.6116C22.4263 16.7116 22.5661 16.7678 22.7119 16.7678C22.8577 16.7678 22.9975 16.7116 23.1006 16.6116L23.5331 16.1866V17.5625C23.5331 19.2533 22.8409 20.8748 21.6088 22.0703C20.3768 23.2659 18.7057 23.9375 16.9632 23.9375C16.818 23.9375 16.6788 23.9935 16.5761 24.0931C16.4734 24.1927 16.4157 24.3279 16.4157 24.4688C16.4157 24.6096 16.4734 24.7448 16.5761 24.8444C16.6788 24.944 16.818 25 16.9632 25C18.9961 25 20.9457 24.2164 22.3831 22.8216C23.8206 21.4268 24.6281 19.535 24.6281 17.5625V16.1866L25.0606 16.6116C25.1115 16.6614 25.1721 16.7009 25.2388 16.7278C25.3055 16.7548 25.3771 16.7687 25.4493 16.7687C25.5216 16.7687 25.5932 16.7548 25.6599 16.7278C25.7266 16.7009 25.7872 16.6614 25.8381 16.6116C25.8894 16.5622 25.9301 16.5034 25.9579 16.4387C25.9857 16.3739 26 16.3045 26 16.2344C26 16.1642 25.9857 16.0948 25.9579 16.0301C25.9301 15.9653 25.8894 15.9066 25.8381 15.8572L24.4693 14.5291Z" fill={iconColor}/>
+        </svg>
+      )
+    }
+    if (key === 'LIFE_INSURANCE') {
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 30 30" fill="none" className={size}>
+          <path d="M15.0703 27.9987C14.3565 28.0707 10.6473 25.0484 9.77801 24.1843C6.89173 21.3151 5.49199 17.8142 5.09454 13.8065C4.95109 12.3598 5.01375 10.8973 5.01292 9.44599L5.0118 8.2013C5.01072 7.09826 4.99905 7.2668 5.90585 6.87874L13.8854 3.44131C14.2288 3.29441 14.5868 3.09039 14.9477 3.00046C15.2884 2.97829 16.886 3.77131 17.2862 3.94362L23.8018 6.73545C25.0793 7.28647 24.9947 6.97996 24.9936 8.34977L24.9931 9.5379C24.993 10.6761 25.0201 11.8207 24.9676 12.9575C24.6778 19.2263 21.9051 23.4673 16.8189 26.9351C16.3832 27.2322 15.5601 27.8269 15.0703 27.9987ZM14.0672 9.95967C13.2973 10.009 13.4308 10.7378 13.4312 11.3004C13.4316 11.9035 13.4426 12.5086 13.426 13.1115C12.8927 13.0962 12.3579 13.1039 11.8243 13.104C11.1618 13.1042 10.3299 12.915 10.3162 13.8742C10.3108 14.2537 10.2703 15.5962 10.3413 15.8859C10.4918 16.4992 11.2031 16.3794 11.6641 16.3793C12.2535 16.3791 12.8454 16.367 13.4345 16.384L13.4327 18.1496C13.434 19.5065 13.4352 19.5459 14.6819 19.547L15.9765 19.5485C16.7642 19.4643 16.5987 18.604 16.5985 18.0251C16.5983 17.4775 16.6037 16.9291 16.5948 16.3815L18.2521 16.379C18.7446 16.379 19.5303 16.5268 19.681 15.865C19.7514 15.5555 19.7117 14.4908 19.7049 14.0942C19.6857 12.959 19.2048 13.104 18.3272 13.1043C17.7556 13.1045 17.1802 13.1199 16.6093 13.0912C16.5758 12.4905 16.5984 11.8801 16.5984 11.278C16.5982 10.0591 16.6694 9.95141 15.3424 9.95215C14.9176 9.9524 14.4919 9.94797 14.0672 9.95967Z" fill={iconColor}/>
+        </svg>
+      )
+    }
+    return null
+  }
+
   return (
     <div className="hero w-full bg-[#E8F4FC] h-full p-4 md:p-4 lg:p-6 xl:p-1">
       <div className="container mx-auto ">
         <div className="content bg-[#E8F4FC] flex flex-col items-center justify-center gap-4 md:gap-4 lg:gap-5 xl:gap-5 relative">
         
-          <div className="title-container flex flex-col items-center justify-center gap-2 md:gap-2 lg:gap-2.5 xl:gap-3 text-center ">
+          <div className="title-container hidden md:flex flex flex-col items-center justify-center gap-2 md:gap-2 lg:gap-2.5 xl:gap-3 text-center ">
             <div className="title ">
               <h1 className="text-3xl md:text-3xl lg:text-3xl xl:text-4xl max-w-[230px] md:max-w-[500px] lg:max-w-[600px] font-bold text-heading-color text-center font-poppins-util xl:leading-[1.15]">
                 {HERO_CONSTANTS.MAIN_HEADING.part1} <span className="heading-gradient display-inline">{HERO_CONSTANTS.MAIN_HEADING.part2}</span>
@@ -53,9 +126,10 @@ export default function Hero() {
           
 
           
-          <div className="hero-container hidden md:flex bg-[#E8F4FC] flex-col items-center justify-center md:px-4 ">
+          <div className="hero-container  bg-[#E8F4FC] flex-col items-center justify-center md:px-4 ">
+
           
-            <div className="nav-tabs bg-[#E8F4FC] flex items-center justify-center  ">
+            <div className="desktop-nav-tabs hidden md:flex bg-[#E8F4FC] items-center justify-center  ">
               <div className="w-full rounded-t-[20px] max-w-[255px] min-[425px]:max-w-[290px] md:max-w-[720px] lg:max-w-[770px] xl:max-w-[900px] flex items-center justify-center ">
                 {Object.entries(HERO_CONSTANTS.NAV_TABS).map(([key, tab]) => (
                    <div
@@ -104,8 +178,115 @@ export default function Hero() {
               </div>
             </div>
 
+            <div className="mobile-nav-tabs block md:hidden w-full bg-[#E8F4FC] mb-4">
+              <div className="bg-white rounded-full p-1.5">
+                <div className="flex items-center gap-1 overflow-x-auto">
+                  {TABS.map((key, index) => {
+                    const activeIndex = TABS.indexOf(activeTab)
+                    const isActive = activeTab === key
+                    
+                    if (index < activeIndex) {
+                      return (
+                        <div
+                          key={key}
+                          className="w-10 h-10 rounded-full  flex items-center justify-center flex-shrink-0 cursor-pointer transition-all duration-500 ease-in-out"
+                          onClick={() => {
+                            setActiveTab(key)
+                            if (autoChangeIntervalRef.current) {
+                              clearInterval(autoChangeIntervalRef.current)
+                              autoChangeIntervalRef.current = null
+                            }
+                            setTimeout(() => {
+                              const isMobile = window.innerWidth < 768
+                              if (isMobile) {
+                                autoChangeIntervalRef.current = setInterval(() => {
+                                  setActiveTab((prev) => {
+                                    const currentIndex = TABS.indexOf(prev)
+                                    const nextIndex = (currentIndex + 1) % TABS.length
+                                    return TABS[nextIndex]
+                                  })
+                                }, 3000)
+                              }
+                            }, 3000)
+                          }}
+                        >
+                          <div className="w-full h-full rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center transition-all duration-500 ease-in-out">
+                            {renderIcon(key, "w-5 h-5")}
+                          </div>
+                        </div>
+                      )
+                    } else if (index === activeIndex) {
+                      return (
+                        <div
+                          key={key}
+                          className=" flex-shrink-0 cursor-pointer transition-all duration-500 ease-in-out"
+                          onClick={() => {
+                            if (autoChangeIntervalRef.current) {
+                              clearInterval(autoChangeIntervalRef.current)
+                              autoChangeIntervalRef.current = null
+                            }
+                            setTimeout(() => {
+                              const isMobile = window.innerWidth < 768
+                              if (isMobile) {
+                                autoChangeIntervalRef.current = setInterval(() => {
+                                  setActiveTab((prev) => {
+                                    const currentIndex = TABS.indexOf(prev)
+                                    const nextIndex = (currentIndex + 1) % TABS.length
+                                    return TABS[nextIndex]
+                                  })
+                                }, 3000)
+                              }
+                            }, 3000)
+                          }}
+                        >
+                          <div className="flex items-center gap-2 px-2 py-2 rounded-full transition-all duration-500 ease-in-out" style={{ backgroundColor: '#3476DB' }}>
+                            <div className="w-6 h-6 rounded-full bg-white flex items-center justify-center flex-shrink-0 transition-all duration-500 ease-in-out">
+                              {renderIcon(key, "w-4 h-4")}
+                            </div>
+                            <span className="text-white text-[12px] font-semibold font-poppins-util whitespace-nowrap transition-all duration-500 ease-in-out">
+                              {HERO_CONSTANTS.NAV_TABS[key as keyof typeof HERO_CONSTANTS.NAV_TABS].label}
+                            </span>
+                          </div>
+                        </div>
+                      )
+                    } else {
+                      return (
+                        <div
+                          key={key}
+                          className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 cursor-pointer transition-all duration-500 ease-in-out p-0.5 "
+                          onClick={() => {
+                            setActiveTab(key)
+                            if (autoChangeIntervalRef.current) {
+                              clearInterval(autoChangeIntervalRef.current)
+                              autoChangeIntervalRef.current = null
+                            }
+                            setTimeout(() => {
+                              const isMobile = window.innerWidth < 768
+                              if (isMobile) {
+                                autoChangeIntervalRef.current = setInterval(() => {
+                                  setActiveTab((prev) => {
+                                    const currentIndex = TABS.indexOf(prev)
+                                    const nextIndex = (currentIndex + 1) % TABS.length
+                                    return TABS[nextIndex]
+                                  })
+                                }, 3000)
+                              }
+                            }, 3000)
+                          }}
+                        >
+                          <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-400 to-blue-600 flex items-center justify-center transition-all duration-500 ease-in-out">
+                            {renderIcon(key, "w-5 h-5")}
+                          </div>
+                        </div>
+                      )
+                    }
+                  })}
+                </div>
+              </div>
+            </div>
+
             <div
-              className="content-section absolute top-82 min-[375px]:top-77 md:top-48 lg:top-50 xl:top-52 2xl:top-52 w-full md:max-w-[670px] lg:max-w-[900px] xl:max-w-[1200px] px-5 py-6 pb-6 md:p-6 lg:p-7 xl:p-8 2xl:px-9 flex flex-col items-center justify-center bg-white border-[4px] border-[#3476DB] rounded-[23px]"
+              className="content-section  absolute right-0 top-20 min-[375px]:top-77 md:top-48 md:right-8 lg:top-50 lg:right-9.5 xl:top-52 xl:right-9 2xl:top-52 2xl:right-37 w-full md:max-w-[670px] lg:max-w-[900px] xl:max-w-[1200px] px-5 py-6 pb-6 md:p-6 lg:p-7 xl:p-8 2xl:px-9 flex flex-col items-center justify-center bg-white border-[4px] border-[#3476DB] rounded-[23px]"
             >
               <div className="flex flex-col justify-center md:flex-row items-center gap-4 md:gap-4 lg:gap-5 xl:gap-6">
               
@@ -159,7 +340,7 @@ export default function Hero() {
         </div>
         
 
-        <div className="mobile-view block md:hidden w-full mt-8">
+        {/* <div className="mobile-view block md:hidden w-full mt-8">
           <div className="grid grid-cols-2 gap-3 ">
             {HERO_CONSTANTS.MOBILE_VIEW.CARDS.map((card) => (
               <div
@@ -201,7 +382,7 @@ export default function Hero() {
               </div>
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   )

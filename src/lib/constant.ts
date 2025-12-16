@@ -38,7 +38,7 @@ export const HERO_CONSTANTS = {
     AUTO_INSURANCE: {
       heading: "Auto Insurance Made Simple",
       description: "Compare personalized auto insurance quotes in only 3 minutes. Customize the coverage that fits your needs at the price that fits your budget. Save up to 40% or more annually.",
-      ctaButton: "Get My Auto Quote",
+      ctaButton: "Get My Free Quote",
       ctaLink: "https://autoquote.assurerates.com/",
       badge: "b-1.webp",
       image: "h-1.webp",
@@ -47,7 +47,7 @@ export const HERO_CONSTANTS = {
     HOME_INSURANCE: {
       heading: "Home Insurance Made Simple", 
       description: "Compare personalized home insurance quotes in only 3 minutes and see how much you can save. Bundle home and auto insurance to get even bigger savings. Shop the best companies side-by-side.",
-      ctaButton: "Get My Home Quote",
+      ctaButton: "Get My Free Quote",
       ctaLink: "https://homequotes.assurerates.com/",
       badge: "b-2.webp",
       image: "h-2.webp",
@@ -56,7 +56,7 @@ export const HERO_CONSTANTS = {
     MORTGAGE: {
       heading: "Mortgage Made Simple",
       description: "Compare personalized mortgage offers in just 3 minutes and find the right loan for your budget. Explore rates, terms, and lenders side-by-side to get the best deal on your home financing.",
-      ctaButton: "Get Mortgage Quote",
+      ctaButton: "Get My Free Quote",
       ctaLink: "https://mortgage.assurerates.com/",
       badge: "b-3.webp",
       image: "h-3.webp",
@@ -65,7 +65,7 @@ export const HERO_CONSTANTS = {
     LIFE_INSURANCE: {
       heading: "Life Insurance Made Simple",
       description: "Compare personalized life insurance plans in only 3 minutes. Choose coverage that protects your family's future at a price that fits your budget, with trusted insurers you can rely on.",
-      ctaButton: "Get Life Quote",
+      ctaButton: "Get My Free Quote",
       ctaLink: "https://life.assurerates.com/",
       badge: "b-4.webp",
       image: "h-4.webp",
@@ -107,38 +107,75 @@ export const PARTNERS = {
     part2: "Providers"
   },
   SUB_DESCRIPTION: "We work with trusted providers to bring you reliable coverage at the best rates.",
-  PROVIDERS: [
-    {
-      name: "American Family Insurance",
-      logo: "img-1.webp",
-      alt: "American Family Insurance logo"
-    },
-    {
-      name: "Allstate",
-      logo: "img-2.webp", 
-      alt: "Allstate logo"
-    },
-    {
-      name: "Liberty Mutual",
-      logo: "img-3.webp",
-      alt: "Liberty Mutual Insurance logo"
-    },
-    {
-      name: "Progressive",
-      logo: "img-4.webp",
-      alt: "Progressive Insurance logo"
-    },
-    {
-      name: "Root Insurance",
-      logo: "img-5.webp",
-      alt: "Root Insurance logo"
-    },
-    {
-      name: "The General",
-      logo: "img-6.webp",
-      alt: "The General Insurance logo"
-    }
-  ]
+  PROVIDERS: {
+    AUTO_INSURANCE: [
+      {
+        logo: "auto-1.svg",
+        alt: "Auto Insurance logo"
+      },
+      {
+        logo: "auto-2.svg",
+        alt: "Auto Insurance logo"
+      },
+      {
+        logo: "auto-3.svg",
+        alt: "Auto Insurance logo"
+      },
+      {
+        logo: "auto-4.svg",
+        alt: "Auto Insurance logo"
+      },
+      {
+        logo: "auto-5.svg",
+        alt: "Auto Insurance logo"
+      },
+      {
+        logo: "auto-6.svg",
+        alt: "Auto Insurance logo"
+      }
+    ],
+    HOME_INSURANCE: [
+      {
+        logo: "home-1.svg",
+        alt: "Home Insurance logo"
+      },
+      {
+        logo: "home-2.svg",
+        alt: "Home Insurance logo"
+      },
+      {
+        logo: "home-3.svg",
+        alt: "Home Insurance logo"
+      },
+      {
+        logo: "home-4.svg",
+        alt: "Home Insurance logo"
+      },
+      {
+        logo: "home-5.svg",
+        alt: "Home Insurance logo"
+      }
+    ],
+    MORTGAGE: [
+      {
+        logo: "mortgage-1.svg",
+        alt: "Mortgage logo"
+      },
+      {
+        logo: "mortgage-2.svg",
+        alt: "Mortgage logo"
+      },
+      {
+        logo: "mortgage-3.svg",
+        alt: "Mortgage logo"
+      },
+      {
+        logo: "mortgage-4.svg",
+        alt: "Mortgage logo"
+      }
+    ],
+    LIFE_INSURANCE: []
+  }
 }
 
 // About Section Constants

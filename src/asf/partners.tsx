@@ -1,8 +1,22 @@
+'use client'
+
 import React from 'react'
 import Image from 'next/image'
 import { PARTNERS } from '@/lib/constant'
+import { useTab } from '@/contexts/TabContext'
 
 export default function Partners() {
+  const { activeTab } = useTab()
+  
+  const getProviders = () => {
+    if (activeTab === 'LIFE_INSURANCE') {
+      return []
+    }
+    return PARTNERS.PROVIDERS[activeTab] || []
+  }
+
+  const providers = getProviders()
+
   return (
     <div
       className="partners w-full py-6 px-4 md:py-4 lg:py-5 lg:px-6 xl:py-1"
@@ -18,7 +32,7 @@ export default function Partners() {
                 {PARTNERS.MAIN_HEADING.part1} <span className="heading-gradient display-inline">{PARTNERS.MAIN_HEADING.part2}</span>
               </h1>
             </div>
-            <div className="title-description">
+            <div className="title-description xl:hidden">
               <p className="text-sm md:text-sm lg:text-sm xl:text-base text-description-color text-center font-roboto-util max-w-3xl md:max-w-full  mx-auto">
                 {PARTNERS.SUB_DESCRIPTION}
               </p>
@@ -26,21 +40,25 @@ export default function Partners() {
           </div>
 
           
-          <div className="providers w-full h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-6 lg:gap-7 xl:gap-8">
-            {PARTNERS.PROVIDERS.map((provider, index) => {
-              return (
-                <div key={index} className="provider-item flex items-center justify-center w-auto h-[60px] md:h-[60px] lg:h-[70px] xl:h-[80px] ">
-                  <Image 
-                    src={`/${provider.logo}`} 
-                    alt={provider.alt} 
-                    width={200}
-                    height={100}
-                    className="w-auto h-full object-cover" 
-                  />
-                </div>
-              )
-            })}
-          </div>
+          {providers.length > 0 && (
+            <div className="providers w-full h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-6 lg:gap-7 xl:gap-8">
+              {providers.map((provider, index) => {
+                return (
+                  <div key={index} className="provider-item flex items-center justify-center w-full h-[60px] md:h-[60px] lg:h-[70px] xl:h-[80px] px-2 md:px-4">
+                    <div className="w-full h-full flex items-center justify-center">
+                      <Image 
+                        src={`/${provider.logo}`} 
+                        alt={provider.alt} 
+                        width={200}
+                        height={100}
+                        className="max-w-full max-h-full w-auto h-auto object-contain" 
+                      />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
 
 
 
