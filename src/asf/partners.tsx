@@ -41,7 +41,7 @@ export default function Partners() {
 
           
           {providers.length > 0 && (
-            <div className="providers w-full h-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-6 lg:gap-7 xl:gap-8">
+            <div className="providers w-full h-full grid grid-cols-2 md:flex  justify-center items-center gap-3">
               {providers.map((provider, index) => {
                 return (
                   <div key={index} className="provider-item flex items-center justify-center w-full h-[60px] md:h-[60px] lg:h-[70px] xl:h-[80px] px-2 md:px-4">
