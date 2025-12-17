@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { HERO_CONSTANTS } from '@/lib/constant'
 import { useTab } from '@/contexts/TabContext'
 import MobileTabsComponent from '@/components/MobileTabsComponent'
@@ -9,7 +9,6 @@ const TABS = ['AUTO_INSURANCE', 'HOME_INSURANCE', 'MORTGAGE', 'LIFE_INSURANCE'] 
 
 export default function Hero() {
   const { activeTab, setActiveTab } = useTab()
-  const autoChangeIntervalRef = useRef<NodeJS.Timeout | null>(null)
 
   // Memoize tab options to prevent unnecessary re-renders
   const tabOptions = useMemo(
@@ -58,45 +57,7 @@ export default function Hero() {
 
   const handleTabChange = (tabId: string) => {
     setActiveTab(tabId as 'AUTO_INSURANCE' | 'HOME_INSURANCE' | 'MORTGAGE' | 'LIFE_INSURANCE')
-    // Reset auto-change interval
-    if (autoChangeIntervalRef.current) {
-      clearInterval(autoChangeIntervalRef.current)
-      autoChangeIntervalRef.current = null
-    }
   }
-
-  useEffect(() => {
-    const handleResize = () => {
-      const isMobile = window.innerWidth < 768
-      
-      if (isMobile) {
-        if (!autoChangeIntervalRef.current) {
-          autoChangeIntervalRef.current = setInterval(() => {
-            setActiveTab((prev) => {
-              const currentIndex = TABS.indexOf(prev)
-              const nextIndex = (currentIndex + 1) % TABS.length
-              return TABS[nextIndex]
-            })
-          }, 3000)
-        }
-      } else {
-        if (autoChangeIntervalRef.current) {
-          clearInterval(autoChangeIntervalRef.current)
-          autoChangeIntervalRef.current = null
-        }
-      }
-    }
-
-    handleResize()
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      if (autoChangeIntervalRef.current) {
-        clearInterval(autoChangeIntervalRef.current)
-      }
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
 
   const getActiveContent = () => {
     return HERO_CONSTANTS.CONTENT_SECTIONS[activeTab]
