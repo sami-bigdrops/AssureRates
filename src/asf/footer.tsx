@@ -101,11 +101,6 @@ export default function Footer({ hideFloatContainer = false }: FooterProps) {
               <div className="footer-right w-full md:w-[70%] xl:w-[65%] flex flex-col justify-center items-center gap-2">
                 <div className="footer-grid w-full flex flex-row justify-center items-start md:justify-center md:gap-6 lg:gap-10 xl:gap-12 2xl:gap-14 gap-4">
                   <div className="footer-grid-item flex flex-col justify-center items-center md:flex-row md:items-start md:justify-start gap-3 lg:gap-6 xl:gap-8">
-                    <div className="footer-heading">
-                      <h2 className="text-[0.85rem] md:text-[0.9rem] lg:text-[1.1rem] xl:text-[1.18rem] font-roboto-util font-semibold lg:text-sm xl:text-base text-white-color">
-                        SHOP
-                      </h2>
-                    </div>
                     <div className="footer-content flex flex-col justify-center items-center gap-2 md:items-start md:justify-start md:gap-3 lg:gap-4 xl:gap-5">
                       <Link 
                         href="https://autoquote.assurerates.com/" 
@@ -134,11 +129,6 @@ export default function Footer({ hideFloatContainer = false }: FooterProps) {
                     </div>
                   </div>
                   <div className="footer-grid-item flex flex-col justify-center items-center md:flex-row md:items-start md:justify-start gap-3 lg:gap-6">
-                    <div className="footer-heading">
-                      <h2 className="text-[0.85rem] md:text-[0.9rem] lg:text-[1.1rem] xl:text-[1.18rem] font-roboto-util font-semibold lg:text-sm xl:text-base text-white-color">
-                        COMPANY
-                      </h2>
-                    </div>
                     <div className="footer-content flex flex-col justify-center items-center gap-2 md:items-start md:justify-start md:gap-3 lg:gap-4 xl:gap-5">
                       <Link 
                         href="/about" 
@@ -155,11 +145,6 @@ export default function Footer({ hideFloatContainer = false }: FooterProps) {
                     </div>
                   </div>
                   <div className="footer-grid-item flex flex-col justify-center items-center md:flex-row md:items-start md:justify-start gap-3 lg:gap-6 ">
-                    <div className="footer-heading">
-                      <h2 className="text-[0.85rem] md:text-[0.9rem] lg:text-[1.1rem] xl:text-[1.18rem] font-roboto-util font-semibold lg:text-sm xl:text-base text-white-color">
-                        PRIVACY
-                      </h2>
-                    </div>
                     <div className="footer-content flex flex-col justify-center items-center gap-2 md:items-start md:justify-start md:gap-3 lg:gap-4 xl:gap-5">
                       <a
                         href="/privacy-policy"
