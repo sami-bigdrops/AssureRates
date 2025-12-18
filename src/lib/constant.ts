@@ -111,67 +111,82 @@ export const PARTNERS = {
     AUTO_INSURANCE: [
       {
         logo: "auto-1.svg",
-        alt: "Auto Insurance logo"
+        alt: "Auto Insurance logo",
+        width: "w-40"
       },
       {
         logo: "auto-2.svg",
-        alt: "Auto Insurance logo"
+        alt: "Auto Insurance logo",
+        width: "w-40"
       },
       {
         logo: "auto-3.svg",
-        alt: "Auto Insurance logo"
+        alt: "Auto Insurance logo",
+        width: "w-45"
       },
       {
         logo: "auto-4.svg",
-        alt: "Auto Insurance logo"
+        alt: "Auto Insurance logo",
+        width: "w-40"
       },
       {
         logo: "auto-5.svg",
-        alt: "Auto Insurance logo"
+        alt: "Auto Insurance logo",
+        width: "w-40"
       },
       {
         logo: "auto-6.svg",
-        alt: "Auto Insurance logo"
+        alt: "Auto Insurance logo",
+        width: "w-40"
       }
     ],
     HOME_INSURANCE: [
       {
         logo: "home-1.svg",
-        alt: "Home Insurance logo"
+        alt: "Home Insurance logo",
+        width: "w-40"
       },
       {
         logo: "home-2.svg",
-        alt: "Home Insurance logo"
+        alt: "Home Insurance logo",
+        width: "w-30"
       },
       {
         logo: "home-3.svg",
-        alt: "Home Insurance logo"
+        alt: "Home Insurance logo",
+        width: "w-40"
       },
       {
         logo: "home-4.svg",
-        alt: "Home Insurance logo"
+        alt: "Home Insurance logo",
+        width: "w-40"
       },
       {
         logo: "home-5.svg",
-        alt: "Home Insurance logo"
+        alt: "Home Insurance logo",
+        width: "w-45"
       }
     ],
     MORTGAGE: [
       {
         logo: "mortgage-1.svg",
-        alt: "Mortgage logo"
+        alt: "Mortgage logo",
+        width: "w-40"
       },
       {
         logo: "mortgage-2.svg",
-        alt: "Mortgage logo"
+        alt: "Mortgage logo",
+        width: "w-45"
       },
       {
         logo: "mortgage-3.svg",
-        alt: "Mortgage logo"
+        alt: "Mortgage logo",
+        width: "w-45"
       },
       {
         logo: "mortgage-4.svg",
-        alt: "Mortgage logo"
+        alt: "Mortgage logo",
+        width: "w-40"
       }
     ],
     LIFE_INSURANCE: []

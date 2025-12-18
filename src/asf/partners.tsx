@@ -51,7 +51,7 @@ export default function Partners() {
                         alt={provider.alt} 
                         width={200}
                         height={100}
-                        className="w-45 h-auto object-contain" 
+                        className={`${provider.width} h-auto object-contain`}  
                       />
                     </div>
                   </div>
