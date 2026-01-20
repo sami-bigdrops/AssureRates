@@ -103,13 +103,13 @@ export default function Footer({ hideFloatContainer = false }: FooterProps) {
                   <div className="footer-grid-item flex flex-col justify-center items-center md:flex-row md:items-start md:justify-start gap-3 lg:gap-6 xl:gap-8">
                     <div className="footer-content flex flex-col justify-center items-center gap-2 md:items-start md:justify-start md:gap-3 lg:gap-4 xl:gap-5">
                       <Link 
-                        href="https://autoquote.assurerates.com/" 
+                        href="https://autoquotes.assurerates.com/" 
                         className="text-xs md:text-[0.8rem] lg:text-[0.98rem] xl:text-[1.05rem] font-roboto-util cursor-pointer font-medium lg:text-sm xl:text-base text-white-color hover:opacity-80 transition-opacity duration-300"
                       >
                         Auto Insurance
                       </Link>
                       <Link 
-                        href="https://homequotes.assurerates.com/" 
+                        href="https://home.assurerates.com/" 
                         className="text-xs md:text-[0.8rem] lg:text-[0.98rem] xl:text-[1.05rem] font-roboto-util cursor-pointer font-medium lg:text-sm xl:text-base text-white-color hover:opacity-80 transition-opacity duration-300"
                       >
                         Home Insurance

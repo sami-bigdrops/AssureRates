@@ -39,7 +39,7 @@ export const HERO_CONSTANTS = {
       heading: "Auto Insurance Made Simple",
       description: "Compare personalized auto insurance quotes in only 3 minutes. Customize the coverage that fits your needs at the price that fits your budget. Save up to 40% or more annually.",
       ctaButton: "Get My Free Quote",
-      ctaLink: "https://autoquote.assurerates.com/",
+      ctaLink: "https://autoquotes.assurerates.com/",
       badge: "b-1.webp",
       image: "h-1.webp",
       imageAlt: "Auto insurance consultation with agent and customer"
@@ -48,7 +48,7 @@ export const HERO_CONSTANTS = {
       heading: "Home Insurance Made Simple", 
       description: "Compare personalized home insurance quotes in only 3 minutes and see how much you can save. Bundle home and auto insurance to get even bigger savings. Shop the best companies side-by-side.",
       ctaButton: "Get My Free Quote",
-      ctaLink: "https://homequotes.assurerates.com/",
+      ctaLink: "https://home.assurerates.com/",
       badge: "b-2.webp",
       image: "h-2.webp",
       imageAlt: "Family holding roof panels in modern kitchen"

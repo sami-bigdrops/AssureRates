@@ -4,6 +4,7 @@ import React, { useMemo } from 'react'
 import { HERO_CONSTANTS } from '@/lib/constant'
 import { useTab } from '@/contexts/TabContext'
 import MobileTabsComponent from '@/components/MobileTabsComponent'
+import { buildInsuranceUrl } from '@/lib/utils'
 
 const TABS = ['AUTO_INSURANCE', 'HOME_INSURANCE', 'MORTGAGE', 'LIFE_INSURANCE'] as const
 
@@ -61,6 +62,13 @@ export default function Hero() {
 
   const getActiveContent = () => {
     return HERO_CONSTANTS.CONTENT_SECTIONS[activeTab]
+  }
+
+  const getDynamicUrl = (baseUrl: string) => {
+    if (activeTab === 'AUTO_INSURANCE' || activeTab === 'HOME_INSURANCE') {
+      return buildInsuranceUrl(baseUrl)
+    }
+    return baseUrl
   }
 
   const getTabClasses = (tabKey: string) => {
@@ -213,7 +221,10 @@ export default function Hero() {
                     {getActiveContent().description}
                   </p>
                   <button 
-                    onClick={() => window.open(getActiveContent().ctaLink, '_blank', 'noopener,noreferrer')}
+                    onClick={() => {
+                      const url = getDynamicUrl(getActiveContent().ctaLink)
+                      window.open(url, '_blank', 'noopener,noreferrer')
+                    }}
                     className=" text-sm md:text-sm lg:text-sm xl:text-base text-white-color px-4 lg:px-5 py-2.5 md:mt-4 lg:mt-5 font-medium cursor-pointer font-roboto-util transition-all duration-300 hover:opacity-90"
                     style={{
                       borderRadius: '8px',
