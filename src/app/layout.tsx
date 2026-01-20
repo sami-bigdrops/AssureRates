@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import { Poppins, Roboto } from "next/font/google";
-import Script from "next/script";
-import AssureTrackScript from "@/components/AssureTrackScript";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -34,11 +32,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.variable} ${roboto.variable}`} suppressHydrationWarning>
-        <Script
-          src="https://www.assure-track.com/scripts/main.js"
-          strategy="afterInteractive"
-        />
-        <AssureTrackScript />
         {children}
       </body>
     </html>

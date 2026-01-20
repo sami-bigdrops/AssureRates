@@ -4,7 +4,6 @@ import React, { useMemo } from 'react'
 import { HERO_CONSTANTS } from '@/lib/constant'
 import { useTab } from '@/contexts/TabContext'
 import MobileTabsComponent from '@/components/MobileTabsComponent'
-import { buildInsuranceUrl } from '@/lib/utils'
 
 const TABS = ['AUTO_INSURANCE', 'HOME_INSURANCE', 'MORTGAGE', 'LIFE_INSURANCE'] as const
 
@@ -65,9 +64,6 @@ export default function Hero() {
   }
 
   const getDynamicUrl = (baseUrl: string) => {
-    if (activeTab === 'AUTO_INSURANCE' || activeTab === 'HOME_INSURANCE') {
-      return buildInsuranceUrl(baseUrl)
-    }
     return baseUrl
   }
 
