@@ -62,7 +62,7 @@ export default function Navbar() {
         
         
         {/* Main Mobile Navbar */}
-        <div className="bg-white px-6 py-7">
+        <div className="bg-white p-4">
           <div className="flex justify-between items-center">
             {/* Logo */}
             <Link href="/" onClick={closeMobileMenu}>
@@ -71,7 +71,7 @@ export default function Navbar() {
                 alt="AssureRates" 
                 width={120} 
                 height={30} 
-                className="h-8 w-auto" 
+                className="h-16 w-auto" 
                 priority
               />
             </Link>
@@ -177,7 +177,7 @@ export default function Navbar() {
                 alt="AssureRates" 
                 width={120} 
                 height={30} 
-                className="h-8 md:h-9 lg:h-9 xl:h-10 w-auto" 
+                className="h-12 md:h-14 lg:h-16 xl:h-18 w-auto" 
                 priority
               />
             </Link>
