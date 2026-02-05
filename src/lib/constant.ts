@@ -110,7 +110,7 @@ export const PARTNERS = {
   PROVIDERS: {
     AUTO_INSURANCE: [
       {
-        logo: "auto-1.svg",
+        logo: "nationwide.svg",
         alt: "Auto Insurance logo",
         width: "w-40"
       },
