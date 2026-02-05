@@ -9,9 +9,6 @@ export default function Partners() {
   const { activeTab } = useTab()
   
   const getProviders = () => {
-    if (activeTab === 'LIFE_INSURANCE') {
-      return []
-    }
     return PARTNERS.PROVIDERS[activeTab] || []
   }
 

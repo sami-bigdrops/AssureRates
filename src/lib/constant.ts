@@ -189,7 +189,28 @@ export const PARTNERS = {
         width: "w-40"
       }
     ],
-    LIFE_INSURANCE: []
+    LIFE_INSURANCE: [
+      {
+        logo: "life-1.svg",
+        alt: "Life Insurance logo",
+        width: "w-40"
+      },
+      {
+        logo: "life-2.png",
+        alt: "Life Insurance logo",
+        width: "w-24"
+      },
+      {
+        logo: "life-3.webp",
+        alt: "Life Insurance logo",
+        width: "w-24"
+      },
+      {
+        logo: "nationwide.svg",
+        alt: "Life Insurance logo",
+        width: "w-40"
+      }
+    ]
   }
 }
 
