@@ -71,7 +71,7 @@ export default function Navbar() {
                 alt="AssureRates" 
                 width={120} 
                 height={30} 
-                className="h-16 w-auto" 
+                className="h-14 w-auto" 
                 priority
               />
             </Link>
@@ -177,7 +177,7 @@ export default function Navbar() {
                 alt="AssureRates" 
                 width={120} 
                 height={30} 
-                className="h-12 md:h-14 lg:h-16 xl:h-18 w-auto" 
+                className="h-12 md:h-14 lg:h-16 w-auto" 
                 priority
               />
             </Link>
