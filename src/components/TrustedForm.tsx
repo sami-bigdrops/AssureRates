@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 interface TrustedFormProps {
   onCertificateReady?: (certUrl: string, token: string) => void;
@@ -26,12 +26,11 @@ const TrustedForm: React.FC<TrustedFormProps> = ({
   provideReferrer = false,
   timeout = 2000
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
   const scriptRef = useRef<HTMLScriptElement | null>(null);
   const certUrlRef = useRef<HTMLInputElement>(null);
   const tokenRef = useRef<HTMLInputElement>(null);
 
-    const initTrustedForm = () => {
+  const initTrustedForm = useCallback(() => {
     // Avoid loading multiple times
     if (scriptRef.current || document.querySelector('script[src*="trustedform.js"]')) {
       return;
@@ -52,9 +51,7 @@ const TrustedForm: React.FC<TrustedFormProps> = ({
     }
 
     // Add load event listener
-    tf.onload = () => {
-      setIsLoaded(true);
-    };
+    tf.onload = () => {};
 
     tf.onerror = () => {
       console.error('Failed to load TrustedForm script');
@@ -66,34 +63,7 @@ const TrustedForm: React.FC<TrustedFormProps> = ({
       firstScript.parentNode.insertBefore(tf, firstScript);
       scriptRef.current = tf;
     }
-  };
-
-  const getCertificateData = (): Promise<{ certUrl: string; token: string }> => {
-    return new Promise((resolve) => {
-      const checkForCertificate = () => {
-        const certUrl = certUrlRef.current?.value || '';
-        const token = tokenRef.current?.value || '';
-        
-        if (certUrl) {
-          resolve({ certUrl, token });
-          return;
-        }
-
-        // Check again after a short delay
-        setTimeout(checkForCertificate, 100);
-      };
-
-      // Start checking immediately
-      checkForCertificate();
-
-      // Fallback timeout
-      setTimeout(() => {
-        const certUrl = certUrlRef.current?.value || '';
-        const token = tokenRef.current?.value || '';
-        resolve({ certUrl, token });
-      }, timeout);
-    });
-  };
+  }, [enableSandbox, provideReferrer]);
 
   useEffect(() => {
     initTrustedForm();
@@ -120,7 +90,7 @@ const TrustedForm: React.FC<TrustedFormProps> = ({
 
       return () => clearInterval(interval);
     }
-  }, [onCertificateReady, onCertUrlReady, timeout]);
+  }, [initTrustedForm, onCertificateReady, onCertUrlReady, timeout]);
 
   return (
     <>
